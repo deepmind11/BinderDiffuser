@@ -120,6 +120,9 @@ class RFDiffusionRunner:
             inference.deterministic=True
             inference.random_seed=<seed>
         """
+        # Hydra '+' prefix appends keys that RFdiffusion's base config
+        # schema does not declare (inference.deterministic and
+        # inference.random_seed are not part of the upstream struct).
         cmd = [
             self.executable,
             f"inference.input_pdb={target_pdb}",
@@ -127,8 +130,8 @@ class RFDiffusionRunner:
             f"inference.output_prefix={out_prefix}",
             "inference.num_designs=1",
             f"diffuser.T={self.diffuser_T}",
-            "inference.deterministic=True",
-            f"inference.random_seed={seed}",
+            "+inference.deterministic=True",
+            f"+inference.random_seed={seed}",
         ]
         if self.weights_dir is not None:
             cmd.append(f"inference.ckpt_override_path={self.weights_dir}")
