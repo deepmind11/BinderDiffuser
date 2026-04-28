@@ -18,7 +18,7 @@ from __future__ import annotations
 
 import json
 import logging
-from dataclasses import asdict, dataclass
+from dataclasses import dataclass
 from pathlib import Path
 
 from binderdiffuser.config import PipelineConfig
@@ -259,7 +259,6 @@ def _run_mpnn_per_backbone(mpnn, backbones, config, out_dir: Path):
             target_chain=config.target.target_chain,
             path=chain_jsonl,
         )
-        bb_dir = bb.pdb_path.parent
         seqs_dir = out_dir / bb.design_id
         seqs_dir.mkdir(exist_ok=True)
         # In a real run this is where we'd subprocess.run(mpnn.build_command(...)).

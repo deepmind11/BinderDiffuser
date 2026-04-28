@@ -69,7 +69,20 @@ target-version = "py310"
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP", "N", "SIM", "RUF"]
-ignore = ["E501"]
+# RUF002: Greek letters in docstrings are intentional scientific notation
+#         (Cα, β, etc.); flagging them as ambiguous is wrong for this domain.
+# RUF043: pytest.raises(match=...) accepts regex metacharacters; no need to
+#         force raw strings throughout the test suite.
+# N806:   single-letter math identifiers (L, T, etc.) are idiomatic in
+#         structural-biology code that mirrors paper notation.
+ignore = ["E501", "RUF002", "RUF043", "N806"]
+
+[tool.ruff.lint.per-file-ignores]
+# diffuser_T mirrors RFdiffusion's Hydra config field `diffuser.T`; renaming
+# to lowercase would diverge from upstream config keys, so allow mixedCase
+# in the two files that touch it.
+"src/binderdiffuser/config.py" = ["N815"]
+"src/binderdiffuser/diffusion/rfdiff_wrapper.py" = ["N803"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

@@ -142,9 +142,9 @@ def render_pymol_script(
 
     lines: list[str] = [
         f"load {target_pdb}, target",
-        f"hide everything, target",
+        "hide everything, target",
         f"show cartoon, target and chain {target_chain}",
-        f"color gray80, target",
+        "color gray80, target",
     ]
     if motif_residues:
         sel = "+".join(str(r) for r in motif_residues)
