@@ -1,5 +1,6 @@
-"""Sequence design on generated backbones (ProteinMPNN)."""
+"""Sequence design on generated backbones (ProteinMPNN).
 
-from binderdiffuser.sequence.mpnn_runner import ProteinMPNNRunner
+Re-exports populated as modules land.
+"""
 
-__all__ = ["ProteinMPNNRunner"]
+__all__: list[str] = []
