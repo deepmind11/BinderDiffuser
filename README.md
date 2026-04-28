@@ -2,6 +2,10 @@
 
 **De novo protein binder design via motif-scaffolded diffusion + sequence design + structural validation.**
 
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/deepmind11/BinderDiffuser/blob/main/notebooks/02_colab_run.ipynb)
+[![CI](https://github.com/deepmind11/BinderDiffuser/actions/workflows/ci.yml/badge.svg)](https://github.com/deepmind11/BinderDiffuser/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 ![Hero](figures/hero.png)
 
 BinderDiffuser is an end-to-end pipeline for designing protein binders against
