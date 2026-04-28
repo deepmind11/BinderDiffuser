@@ -1,0 +1,52 @@
+# PD-L1 binder design configuration.
+#
+# Target: Programmed death-ligand 1 (PD-L1, gene CD274). Co-inhibitory
+# checkpoint ligand whose blockade is the mechanism of action of pembrolizumab,
+# atezolizumab, and durvalumab. A high-affinity protein binder to PD-L1's
+# IgV domain is a clean reference target with abundant structural data
+# (crystal complexes with PD-1, mAbs, and several reported de novo binders).
+#
+# Reference structure: PDB 5O45 (PD-L1 IgV domain, residues 18-134, chain A
+# of the published binder complex used here as the target).
+#
+# Motif: residues 56-65 on PD-L1 IgV (a contiguous loop on the PD-1 binding
+# face; preserving this loop's geometry concentrates designed binders at the
+# correct epitope).
+
+run_name: pdl1_binder_design_v1
+output_dir: examples/pdl1_binder/runs/v1
+seed: 42
+
+target:
+  pdb_path: examples/pdl1_binder/target/pdl1_5o45.pdb
+  target_chain: B
+  motif_chain: B
+  motif_residues: [56, 57, 58, 59, 60, 61, 62, 63, 64, 65]
+
+diffusion:
+  num_designs: 100
+  binder_length_min: 60
+  binder_length_max: 90
+  diffuser_T: 50
+  rfdiff_executable: run_inference.py
+
+mpnn:
+  num_seqs_per_backbone: 8
+  sampling_temp: 0.1
+  model_name: v_48_020
+  fix_target_residues: true
+
+alphafold:
+  backend: colabfold
+  num_recycles: 3
+  num_models: 1
+  use_templates: false
+  msa_mode: single_sequence
+
+filters:
+  max_sc_rmsd: 2.0
+  min_sc_tm: 0.7
+  min_plddt: 70.0
+  min_iptm: 0.6
+  max_pae_interface: 15.0
+  top_k: 10
